@@ -2,10 +2,12 @@ const Alerta = require('../models/alerta');
 
 let ioInstance;
 
+// Recibir instancia de socket.io
 const setSocketInstance = (io) => {
   ioInstance = io;
 };
 
+// POST /api/alertas
 const recibirSensor = async (req, res) => {
   try {
     const { sensor, valor, dispositivo } = req.body;
@@ -30,7 +32,6 @@ const recibirSensor = async (req, res) => {
       });
 
       await nuevaLectura.save();
-
       return res.status(200).json({ lectura: nuevaLectura });
     }
 
@@ -65,7 +66,42 @@ const recibirSensor = async (req, res) => {
   }
 };
 
+// GET /api/alertas/ultimas/:tipo
+const obtenerUltimasAlertasPorTipo = async (req, res) => {
+  try {
+    const tipo = req.params.tipo;
+
+    const alertas = await Alerta.find({ sensor: tipo })
+      .sort({ fecha: -1 }) // más recientes primero
+      .limit(5);
+
+    res.status(200).json(alertas);
+  } catch (error) {
+    console.error('Error al obtener alertas por tipo:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+// GET /api/alertas/semana
+const obtenerAlertasUltimaSemana = async (req, res) => {
+  try {
+    const fechaLimite = new Date();
+    fechaLimite.setDate(fechaLimite.getDate() - 7); // Últimos 7 días
+
+    const alertas = await Alerta.find({
+      fecha: { $gte: fechaLimite }
+    }).sort({ fecha: -1 });
+
+    res.status(200).json(alertas);
+  } catch (error) {
+    console.error('Error al obtener alertas semanales:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
 module.exports = {
   recibirSensor,
-  setSocketInstance
+  setSocketInstance,
+  obtenerUltimasAlertasPorTipo,
+  obtenerAlertasUltimaSemana
 };
