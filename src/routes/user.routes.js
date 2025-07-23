@@ -7,4 +7,4 @@ router.post('/login', login);
 router.post('/change-password', changePassword);
 router.post('/forgot-password', forgotPassword);
 
-export default router;
+module.exports = router;
