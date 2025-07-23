@@ -1,5 +1,13 @@
 const express = require('express');
-const { getInventario, createInventarioItem, updateInventarioItem, deleteInventarioItem } = require('../controllers/inventario.controller');
+const {
+  getInventario,
+  createInventarioItem,
+  updateInventarioItem,
+  deleteInventarioItem,
+  getInventarioBajoStock,
+  actualizarImagenInventario
+} = require('../controllers/inventario.controller');
+
 
 const router = express.Router();
 

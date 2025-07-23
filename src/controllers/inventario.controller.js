@@ -72,3 +72,12 @@ const actualizarImagenInventario = async (req, res) => {
     res.status(400).json({ message: 'Error updating image', error: err.message });
   }
 };
+
+module.exports = {
+  getInventario,
+  createInventarioItem,
+  updateInventarioItem,
+  deleteInventarioItem,
+  getInventarioBajoStock,
+  actualizarImagenInventario
+};

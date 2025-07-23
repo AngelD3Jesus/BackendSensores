@@ -59,3 +59,9 @@ const forgotPassword = async (req, res) => {
     res.status(500).json({ message: 'Error al restablecer contraseña', error: err.message });
   }
 };
+
+module.exports = {
+  login,
+  changePassword,
+  forgotPassword
+};
