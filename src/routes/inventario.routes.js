@@ -1,5 +1,5 @@
-import express from 'express';
-import { getInventario, createInventarioItem, updateInventarioItem, deleteInventarioItem } from '../controllers/inventario.controller.js';
+const express = require('express');
+const { getInventario, createInventarioItem, updateInventarioItem, deleteInventarioItem } = require('../controllers/inventario.controller');
 
 const router = express.Router();
 

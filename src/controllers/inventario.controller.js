@@ -1,4 +1,4 @@
-import Inventario from '../models/inventario.model.js';
+const Inventario = require('../models/inventario.model');
 
 export const getInventario = async (req, res) => {
   try {

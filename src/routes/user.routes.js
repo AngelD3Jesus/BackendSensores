@@ -1,5 +1,5 @@
-import express from 'express';
-import { login, changePassword, forgotPassword } from '../controllers/user.controller.js';
+const express = require('express');
+const { login, changePassword, forgotPassword } = require('../controllers/user.controller');
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const inventarioSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
