@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  mustChangePassword: { type: Boolean, default: true }, // Obliga a cambiar en primer login
+  mustChangePassword: { type: Boolean, default: true },
   email: { type: String, required: true, unique: true }
 });
 
@@ -21,4 +21,4 @@ userSchema.methods.comparePassword = function (candidatePassword) {
 };
 
 const User = mongoose.model('User', userSchema);
-export default User;
+module.exports = User;
