@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ username });
@@ -24,7 +24,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const changePassword = async (req, res) => {
+const changePassword = async (req, res) => {
   const { username, oldPassword, newPassword, email } = req.body;
   try {
     const user = await User.findOne({ username });
@@ -44,7 +44,7 @@ export const changePassword = async (req, res) => {
   }
 };
 
-export const forgotPassword = async (req, res) => {
+const forgotPassword = async (req, res) => {
   const { email, newPassword } = req.body;
   try {
     const user = await User.findOne({ email });

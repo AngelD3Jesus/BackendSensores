@@ -1,6 +1,6 @@
 const Inventario = require('../models/inventario.model');
 
-export const getInventario = async (req, res) => {
+const getInventario = async (req, res) => {
   try {
     const inventario = await Inventario.find();
     res.status(200).json(inventario);
@@ -9,7 +9,7 @@ export const getInventario = async (req, res) => {
   }
 };
 
-export const createInventarioItem = async (req, res) => {
+const createInventarioItem = async (req, res) => {
   const { nombre, cantidad, descripcion, imagen } = req.body; // <-- agrega imagen
 
   try {
@@ -21,7 +21,7 @@ export const createInventarioItem = async (req, res) => {
   }
 };
 
-export const updateInventarioItem = async (req, res) => {
+const updateInventarioItem = async (req, res) => {
   const { id } = req.params;
   const { nombre, cantidad, descripcion } = req.body;
 
@@ -36,7 +36,7 @@ export const updateInventarioItem = async (req, res) => {
   }
 };
 
-export const deleteInventarioItem = async (req, res) => {
+const deleteInventarioItem = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -49,7 +49,7 @@ export const deleteInventarioItem = async (req, res) => {
     res.status(500).json({ message: 'Error deleting inventory item', error: err.message });
   }
 };
-export const getInventarioBajoStock = async (req, res) => {
+const getInventarioBajoStock = async (req, res) => {
   const min = parseInt(req.params.min, 10) || 5;
   try {
     const items = await Inventario.find({ cantidad: { $lte: min } });
@@ -58,7 +58,7 @@ export const getInventarioBajoStock = async (req, res) => {
     res.status(500).json({ message: 'Error fetching low stock items', error: err.message });
   }
 };
-export const actualizarImagenInventario = async (req, res) => {
+const actualizarImagenInventario = async (req, res) => {
   const { imagen } = req.body;
   try {
     const item = await Inventario.findByIdAndUpdate(
