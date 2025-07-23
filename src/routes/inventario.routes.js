@@ -15,4 +15,10 @@ router.put('/:id', updateInventarioItem);
 // DELETE /api/inventario/:id - Delete an inventory item by ID
 router.delete('/:id', deleteInventarioItem);
 
+// ...existing code...
+router.get('/bajo-stock/:min', getInventarioBajoStock);
+
+// ...existing code...
+router.patch('/:id/imagen', actualizarImagenInventario);
+// ...existing code...
 export default router;
