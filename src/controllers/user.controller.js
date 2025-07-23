@@ -4,6 +4,32 @@ const bcrypt = require('bcryptjs');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
+const register = async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+
+    // Validación básica
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+    }
+
+    // Verificar si ya existe el email o username
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+    if (existingUser) {
+      return res.status(400).json({ message: 'El usuario o email ya está en uso' });
+    }
+
+    // Crear y guardar el nuevo usuario
+    const newUser = new User({ username, email, password });
+    await newUser.save();
+
+    res.status(201).json({ message: 'Usuario creado correctamente' });
+  } catch (error) {
+    console.error('❌ Error al registrar usuario:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
 const login = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -61,6 +87,7 @@ const forgotPassword = async (req, res) => {
 };
 
 module.exports = {
+    register,
   login,
   changePassword,
   forgotPassword
