@@ -1,15 +1,14 @@
-import express from 'express';
-import http from 'http';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import alertaRoutes from './routes/sensor.routes.js';
-import inventarioRoutes from './routes/inventario.routes.js';
-import sensorRoutes from './routes/sensor.routes.js';
-import socketHandler from './socket.js';
-import { setSocketInstance } from './controllers/sensor.controller.js';
-import userRoutes from './routes/user.routes.js';
-
+const express = require('express');
+const http = require('http');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const alertaRoutes = require('./routes/sensor.routes');
+const inventarioRoutes = require('./routes/inventario.routes');
+const sensorRoutes = require('./routes/sensor.routes');
+const socketHandler = require('./socket');
+const { setSocketInstance } = require('./controllers/sensor.controller');
+const userRoutes = require('./routes/user.routes');
 
 dotenv.config();
 
