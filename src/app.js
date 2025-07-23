@@ -31,7 +31,7 @@ app.use('/api/user', userRoutes);
 app.use('/api', sensorRoutes); // Para POST /api/alertas desde sensores
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
